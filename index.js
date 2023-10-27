@@ -4,6 +4,11 @@ const { Octokit } = require('octokit');
 
 try {
   // `who-to-greet` input defined in action metadata file
+
+  const octokit = new Octokit({ 
+    auth: process.env.token,
+  });
+
   const imageName = core.getInput('image-name');
   console.log(`Image name is: ${imageName}`);
 
