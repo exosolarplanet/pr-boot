@@ -33,12 +33,20 @@ try {
   const deploymentRepoName = `${teamNumber}-${teamName}-demo-deployment-repository`;
   console.log(`Deployment Repo Name: ${deploymentRepoName}`);
 
-  const response = octokit.request('POST /repos/{owner}/{repo}/actions/workflows/deploy.yaml/dispatches', {
-    data: '{"ref":"main"}',
+  
+  await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
     owner: 'exosolarplanet',
-    repo: deploymentRepoName
-  });
-
+    repo: deploymentRepoName,
+    workflow_id: 'deploy.yaml',
+    ref: 'main',
+    // inputs: {
+    //   name: 'Mona the Octocat',
+    //   home: 'San Francisco, CA'
+    // },
+    headers: {
+      'X-GitHub-Api-Version': '2022-11-28'
+    }
+  })
 //   const res = await response;
 //   console.log(res.data);
 
