@@ -48,4 +48,5 @@ try {
   
 } catch (error) {
   core.setFailed(error.message);
+  octokit.setFailed(error.message)
 }
