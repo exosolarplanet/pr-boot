@@ -39,8 +39,8 @@ try {
     repo: deploymentRepoName
   });
 
-  const res = (await response);
-  console.log(res.data);
+//   const res = await response;
+//   console.log(res.data);
 
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
