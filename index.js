@@ -34,7 +34,7 @@ try {
   console.log(`Deployment Repo Name: ${deploymentRepoName}`);
 
   
-  await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+  const response = octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
     owner: 'exosolarplanet',
     repo: deploymentRepoName,
     workflow_id: 'deploy.yaml',
@@ -46,10 +46,8 @@ try {
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
     }
-  })
-//   const res = await response;
-//   console.log(res.data);
-
+  });
+  
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
 
