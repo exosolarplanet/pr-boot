@@ -22,8 +22,12 @@ try {
   const repoName = payloadJson.repository.name;
   console.log(`Repo name: ${repoName}`);
 
+  const teamName = repoName.split('-')[1];
+  console.log(`Team name: ${teamName}`);
+
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
+
   
 } catch (error) {
   core.setFailed(error.message);
