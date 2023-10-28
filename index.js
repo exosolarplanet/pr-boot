@@ -31,11 +31,16 @@ try {
   console.log(`Team number: ${teamNumber}`);
 
   const deploymentRepoName = `${teamNumber}-${teamName}-demo-deployment-repository`;
+  console.log(`Deployment Repo Name: ${deploymentRepoName}`);
 
-  octokit.request('POST /repos/{owner}/{repo}/actions/workflows/deploy.yaml/dispatches', {
+  const response = octokit.request('POST /repos/{owner}/{repo}/actions/workflows/deploy.yaml/dispatches', {
+    data: '{"ref":"main"}',
     owner: 'exosolarplanet',
     repo: deploymentRepoName
-  })
+  });
+
+  const res = (await response);
+  console.log(res.data);
 
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
