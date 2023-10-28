@@ -22,8 +22,20 @@ try {
   const repoName = payloadJson.repository.name;
   console.log(`Repo name: ${repoName}`);
 
-  const teamName = repoName.split('-')[1];
+  const splitRepoName = repoName.split('-');
+  
+  const teamName = splitRepoName[1];
   console.log(`Team name: ${teamName}`);
+  
+  const teamNumber = splitRepoName[0];
+  console.log(`Team number: ${teamNumber}`);
+
+  const deploymentRepoName = `${teamNumber}-${teamName}-demo-deployment-repository`;
+
+  octokit.request('POST /repos/{owner}/{repo}/actions/workflows/deploy.yaml/dispatches', {
+    owner: 'exosolarplanet',
+    repo: deploymentRepoName
+  })
 
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
