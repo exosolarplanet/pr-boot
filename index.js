@@ -39,15 +39,16 @@ try {
     repo: deploymentRepoName,
     workflow_id: 'deploy.yaml',
     ref: 'main',
-    // inputs: {
-    //   name: 'Mona the Octocat',
-    //   home: 'San Francisco, CA'
-    // },
+    inputs: {
+      image_name: imageName,
+      image_version: imageVersion,
+      artifactory_path: artifactoryPath
+    },
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
     }
   });
-  
+
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
 
