@@ -5,7 +5,10 @@ const { Octokit } = require('octokit');
 try {
   // `who-to-greet` input defined in action metadata file
 
-  const octokit = new Octokit({ 
+  const octokit = new Octokit({
+    request: {
+      fetch: fetch,
+    },
     auth: process.env.token,
   });
 
