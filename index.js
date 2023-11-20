@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import core from '@actions/core';
 import github from '@actions/github';
-import Octokit from 'octokit';
+import { Octokit } from 'octokit';
 
 try {
   // `who-to-greet` input defined in action metadata file
