@@ -7,7 +7,7 @@ try {
 
   const octokit = new Octokit({
     request: {
-      fetch: fetch,
+      fetch: node-fetch,
     },
     auth: process.env.token,
   });
