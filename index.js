@@ -1,13 +1,14 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { Octokit } = require('octokit');
+import fetch from "node-fetch";
 
 try {
   // `who-to-greet` input defined in action metadata file
 
   const octokit = new Octokit({
     request: {
-      fetch: node-fetch,
+      fetch: fetch,
     },
     auth: process.env.token,
   });
