@@ -5,12 +5,7 @@ import { Octokit } from 'octokit';
 
 try {
   // `who-to-greet` input defined in action metadata file
-  const octokit = new Octokit({
-    request: {
-      fetch: fetch,
-    },
-    auth: process.env.token,
-  });
+  const octokit = github.getOctokit(process.env.token);
 
   const imageName = core.getInput('image-name');
   console.log(`Image name is: ${imageName}`);
