@@ -30187,10 +30187,10 @@ var __webpack_exports__ = {};
 
 
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(process.env.token);
+const token = process.env.token;
+const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
 
+try {
   const imageName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('image-name');
   console.log(`Image name is: ${imageName}`);
 
@@ -30206,38 +30206,17 @@ try {
 
   const splitRepoName = repoName.split('-');
   
-  const teamName = splitRepoName[1];
-  console.log(`Team name: ${teamName}`);
+  const tenantName = splitRepoName[2];
+  console.log(`Team name: ${tenantName}`);
   
-  const teamNumber = splitRepoName[0];
-  console.log(`Team number: ${teamNumber}`);
+  const tenantNar = splitRepoName[0] + '-' + splitRepoName[1];
+  console.log(`Team number: ${tenantNar}`);
 
-  const deploymentRepoName = `${teamNumber}-${teamName}-demo-deployment-repository`;
+  const deploymentRepoName = `${tenantNar}-${tenantName}-demo-deployment-repository`;
   console.log(`Deployment Repo Name: ${deploymentRepoName}`);
 
-  
-  const response = octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-    owner: 'exosolarplanet',
-    repo: deploymentRepoName,
-    workflow_id: 'deploy.yaml',
-    ref: 'main',
-    inputs: {
-      image_name: imageName,
-      image_version: imageVersion,
-      artifactory_path: artifactoryPath
-    },
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28'
-    }
-  });
-
-  const payload = JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload, undefined, 2);
-  console.log(`The event payload: ${payload}`);
-
-  
 } catch (error) {
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
-  octokit.setFailed(error.message)
 }
 
 })();
